@@ -25,29 +25,29 @@ const BugList = styled.div`
   min-height: 500px;
 `;
 
-export default class Column extends React.Component {
-  render() {
-    return (
-      <Container>
-        <Title>{this.props.column.title}</Title>
-        <Droppable
-          droppableId={this.props.column.id}
-          type={this.props.column.id === "column-4" ? "done" : "active"}
-        >
-          {(provided, snapshot) => (
-            <BugList
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              isDraggingOver={snapshot.isDraggingOver}
-            >
-              {this.props.tasks.map((task, index) => (
-                <Bug key={task.id} task={task} index={index} />
-              ))}
-              {provided.placeholder}
-            </BugList>
-          )}
-        </Droppable>
-      </Container>
-    );
-  }
-}
+const Column = (props) => {
+  return (
+    <Container>
+      <Title>{props.column.title}</Title>
+      <Droppable
+        droppableId={props.column.id}
+        type={props.column.id === "column-4" ? "done" : "active"}
+      >
+        {(provided, snapshot) => (
+          <BugList
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            isDraggingOver={snapshot.isDraggingOver}
+          >
+            {props.tasks.map((task, index) => (
+              <Bug key={task.id} task={task} index={index} />
+            ))}
+            {provided.placeholder}
+          </BugList>
+        )}
+      </Droppable>
+    </Container>
+  );
+};
+
+export default Column;
